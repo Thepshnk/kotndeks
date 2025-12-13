@@ -21,7 +21,7 @@
 1. Клонируйте репозиторий:
 
 ```bash
-git clone https://github.com/<ваш_репозиторий>/kotndeks-browser.git
+git clone https://github.com/Thepshnk/kotndeks
 ```
 
 2. Откройте файл `index.html` в любом современном браузере (Chrome, Firefox, Edge).
