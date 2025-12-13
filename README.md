@@ -45,13 +45,6 @@ git clone https://github.com/Thepshnk/kotndeks
 * Домен: `Site.krutoy`
 * Генерация ссылки: `kotndeks://Site.krutoy/JIOJE3OIJIOjei32nhjkrh3u4yiehw`
 * Расшифровка этой ссылки вернет исходный текст.
-
----
-
-## Лицензия
-
-MIT License — свободное использование и модификация.
-
 ---
 
 ## Планы на будущее
@@ -65,5 +58,4 @@ MIT License — свободное использование и модифик�
 
 ## Контакты
 
-* GitHub: [Ваш профиль](https://github.com/<ваш_репозиторий>)
-* Email: [your.email@example.com](mailto:your.email@example.com)
+* GitHub: (https://github.com/Thepshnk)
