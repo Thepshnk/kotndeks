@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kotndeks K2K</title>
+<style>
+body{margin:0; height:100%; background:#0b0c10; color:#c5c6c7; font-family:monospace; display:flex; justify-content:center; align-items:center; flex-direction:column;}
+.container{display:flex; gap:20px;}
+.panel{background:#1f2833; padding:20px; border-radius:8px; display:flex; flex-direction:column; align-items:center; min-width:300px;}
+input{padding:10px; border-radius:6px; border:none; margin:5px 0; width:250px; background:#0b0c10; color:#c5c6c7;}
+button{padding:10px 16px; margin:5px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; background:#45a29e; color:#0b0c10;}
+.out-box{margin-top:10px; border:1px dashed #45a29e; padding:10px; min-width:250px; min-height:50px; word-break:break-all;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="panel" id="create-panel">
+    <h3>Создать ссылку</h3>
+    <input id="domain" placeholder="Ваш домен" />
+    <input id="txt-create" placeholder="Введите текст" />
+    <button onclick="createLink()">Создать</button>
+    <div class="out-box" id="out-create"></div>
+  </div>
+  <div class="panel" id="read-panel">
+    <h3>Прочитать ссылку</h3>
+    <input id="txt-read" placeholder="Вставьте ссылку или payload" />
+    <button onclick="readLink()">Прочитать</button>
+    <div class="out-box" id="out-read"></div>
+  </div>
+</div>
+<script>
+function xor(str,key=71){return[...str].map(c=>String.fromCharCode(c.charCodeAt(0)^key)).join('')}
+function scramble(str){return str.split('').reverse().join('')}
+function encode(text){return btoa(scramble(xor(text))).replace(/=/g,'').replace(/\+/g,'X').replace(/\//g,'Z')}
+function decode(data){let fixed=data.replace(/X/g,'+').replace(/Z/g,'/'); const pad=fixed.length%4;if(pad) fixed+='='.repeat(4-pad); return xor(scramble(atob(fixed)))}
+
+function createLink(){
+  const domain=document.getElementById('domain').value.trim()||'Site.krutoy';
+  const val=document.getElementById('txt-create').value;
+  if(!val){alert('Введите текст'); return;}
+  const payload=encode(val);
+  document.getElementById('out-create').textContent=`kotndeks://${domain}/${payload}`;
+}
+
+function readLink(){
+  const val=document.getElementById('txt-read').value.trim();
+  if(!val){alert('Введите ссылку или payload'); return;}
+  const payload=val.startsWith('kotndeks://')?val.split('/').pop():val;
+  try{
+    document.getElementById('out-read').textContent=decode(payload);
+  }catch(e){
+    document.getElementById('out-read').textContent='Ошибка расшифровки';
+  }
+}
+</script>
+</body>
+</html>
